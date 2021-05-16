@@ -25,30 +25,24 @@ class Solution_String_2 {
         	int count, index;
         	String temp = "";
         	
-        	Loop : for(int i = 0; i < s.length(); i = index) {
+        	for(int i = 0; i < s.length(); i = index) {
         		count = 1;
-        		index = i + size; //현재 인덱스
-        		if(index + size > s.length()) { //다음 인덱스까지 위치가 문자열 길이보다 길면 break
+        		index = i + size; //검사할 현재 문자열의 끝
+        		if(index + size > s.length()) { //검사할 다음 인덱스의 위치들이 문자열 크기보다 크면 남은 문자열 더해준 뒤 break
         			temp += s.substring(i);
         			break;
         		}
         		
-        		String t1 = s.substring(i, index);
-        		String t2;
+        		String t1 = s.substring(i, index); //검사할 현재 문자열
+        		String t2; //검사할 다음 문자열
         		
-        		while((index += size) <= s.length() && (t2 = s.substring(index - size, index)).equals(t1)) { //s를 현재 인덱스에서 다음 단위까지 검사 후 비교 
-        			if(index == s.length()) {
-        				count++;
-        				temp += count + t1;
-        				break Loop;
-        			}
-        			count++;
-        		}
+        		//s를 현재 인덱스에서 다음 단위까지 검사 후 비교, 다음 문자열과 다를 때 반복문 끝남, index의 위치는 다음 문자열의 끝
+        		while((index += size) <= s.length() && (t2 = s.substring(index - size, index)).equals(t1)) count++;
         		
-        		if(count != 1) temp += count + t1;        		
+        		if(count != 1) temp += count + t1; //중복된 것이 있으면 개수 + 문자열, 없으면 + 문자열
         		else temp += t1;
         		
-        		index -= size;	
+        		index -= size; //현재 문자열과 다음 문자열이 다르기 때문에 다음 문자열의 시작 위치로 index 이동
         	}
         	max = Math.min(max, temp.length());
         }
