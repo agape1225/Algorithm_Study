@@ -47,9 +47,8 @@ public class B9081 { //단어 맞추기
 			// 남은 뒤에 인덱스부터 오름차순으로 정렬하고 저장한 문자열에 더해준다.
 			if(isChanged) {
 				String tempS = s.substring(0, indexI) + s.charAt(indexJ);
-				if(indexI + 1 == indexJ) tempS += s.charAt(indexI);
-				else tempS += s.substring(indexI + 1, indexJ) + s.charAt(indexI);
-				if(tempS.length() != s.length()) tempS += s.substring(indexJ + 1, s.length());
+				tempS += s.substring(indexI + 1, indexJ) + s.charAt(indexI);
+				tempS += s.substring(indexJ + 1, s.length());
 				
 				res = tempS.substring(0, indexI + 1);
 				res += solve_sort(tempS.substring(indexI + 1, tempS.length()));
